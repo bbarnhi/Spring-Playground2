@@ -24,10 +24,16 @@ public class SpringApp {
         if (type.equals("circle")){
             double r = nums[0];
             result = (float) (3.14 * r*r);
-            System.out.println(result);
+            //System.out.println(result);
         }
         if (type.equals("rectangle")){
-            result = nums[0]*nums[1];
+            if (nums.length != 2){
+                return "Invalid - Incorrect number of variables passed";
+            }
+            else {
+                result = nums[0]*nums[1];
+
+            }
         }
         return String.format("The area of a %s is %s", type, result);
     }
