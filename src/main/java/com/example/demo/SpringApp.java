@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.sun.source.tree.ReturnTree;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
@@ -14,7 +15,24 @@ public class SpringApp {
         return "3.141592653589793";
     }
 
-    @GetMapping("/hwl/{height}/{width}/{length}")
+    @PostMapping("/math/area")
+    public String areaCalc(
+            @RequestParam String type,
+            @RequestParam double[] nums) {
+        double result = 0;
+        //System.out.println("Type: "+type+" Numbers : "+ nums[0]);
+        if (type.equals("circle")){
+            double r = nums[0];
+            result = (float) (3.14 * r*r);
+            System.out.println(result);
+        }
+        if (type.equals("rectangle")){
+            result = nums[0]*nums[1];
+        }
+        return String.format("The area of a %s is %s", type, result);
+    }
+
+    @RequestMapping("/hwl/{height}/{width}/{length}")
     public String getMapParams(@PathVariable Map<String, String> querystring){
         int lwh = 1;
         for (String i : querystring.keySet()) {
